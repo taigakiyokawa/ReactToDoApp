@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/taigakiyokawa/ReactToDoApp/issues"
   },
-  "homepage": "https://github.com/taigakiyokawa/ReactToDoApp#readme"
+  "homepage": "https://github.com/taigakiyokawa/ReactToDoApp#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.4.4",
+    "babel-loader": "^8.0.6"
+  }
 }

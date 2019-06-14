@@ -23,7 +23,7 @@ export default {
   },
 
   resolve: {
-    extension: ['.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
 
   plugins: []

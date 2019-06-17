@@ -13,8 +13,8 @@ export default class App extends React.Component {
   
   render () {
     return (
-      <div className="siimple-box">
-        <h1 className="siimple-box-title">TODO</h1>
+      <div>
+        <h1>TODO</h1>
         <Form/>
       </div>
     )

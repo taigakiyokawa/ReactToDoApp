@@ -6,10 +6,6 @@ export default class App extends React.Component {
     super(props)
     this.state = { massage: 'something' }
   }
-
-  onChange(e) {
-    this.setState( {message: e.target.value} )
-  }
   
   render () {
     return (

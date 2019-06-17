@@ -1,4 +1,5 @@
 import React from 'react';
+import Form from './Form';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -12,9 +13,9 @@ export default class App extends React.Component {
   
   render () {
     return (
-      <div>
-        <input type="text" onChange = { this.onChange.bind(this) } />
-        <p>{ this.state.message }</p>
+      <div className="siimple-box">
+        <h1 className="siimple-box-title">TODO</h1>
+        <Form/>
       </div>
     )
   }

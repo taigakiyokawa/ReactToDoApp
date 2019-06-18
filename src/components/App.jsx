@@ -7,8 +7,11 @@ export default class App extends React.Component {
     super(props);
     this.state ={
       todo: [],
+      isDisabled: true,
     };
     this.handleCreate = this.handleCreate.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   // Create TODO
@@ -24,6 +27,11 @@ export default class App extends React.Component {
     event.target.title.value = "";
   }
 
+  // Edit TODO
+  handleEdit(i) {
+    console.log(`TODO ${i} is Edit mode now.`);
+  }
+
   // Delete TODO
   handleDelete(i) {
     this.state.todo.splice(i, 1);
@@ -36,7 +44,7 @@ export default class App extends React.Component {
       <div>
         <h1>TODO</h1>
         <Form handleCreate={ this.handleCreate }/>
-        <TodoList todos={ this.state.todo }/>
+        <TodoList todos={ this.state.todo } handleEdit={ this.handleEdit } handleDelete={ this.handleDelete }/>
       </div>
     )
   }

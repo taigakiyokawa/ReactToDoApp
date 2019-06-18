@@ -29,7 +29,7 @@ export default class App extends React.Component {
       <div>
         <h1>TODO</h1>
         <Form handleCreate={ this.handleCreate }/>
-        <TodoList/>
+        <TodoList todos={ this.state.todo }/>
       </div>
     )
   }

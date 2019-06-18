@@ -11,7 +11,7 @@ export default class App extends React.Component {
     this.handleCreate = this.handleCreate.bind(this);
   }
 
-  // Save todo
+  // Create TODO
   handleCreate(event) {
     // console.log(e.target.title.value);
     // Prevent redirect
@@ -20,8 +20,15 @@ export default class App extends React.Component {
     this.state.todo.push({ title: event.target.title.value }); // Doesn't save yet
     // Update state
     this.setState({ todo: this.state.todo });
-    // Reset value
+    // Reset input value
     event.target.title.value = "";
+  }
+
+  // Delete TODO
+  handleDelete(i) {
+    this.state.todo.splice(i, 1);
+    // Update state
+    this.setState({ todo: this.state.todo });
   }
   
   render () {

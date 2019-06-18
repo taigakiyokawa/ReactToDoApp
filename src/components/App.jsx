@@ -6,7 +6,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state ={
-      todo: [],
+      todoList: [],
       isDisabled: true,
     };
     this.handleCreate = this.handleCreate.bind(this);
@@ -16,13 +16,12 @@ export default class App extends React.Component {
 
   // Create TODO
   handleCreate(event) {
-    // console.log(e.target.title.value);
     // Prevent redirect
     event.preventDefault();
     // Add data to todo-array from Form
-    this.state.todo.push({ title: event.target.title.value }); // Doesn't save yet
+    this.state.todoList.push({ title: event.target.title.value }); // Doesn't save yet
     // Update state
-    this.setState({ todo: this.state.todo });
+    this.setState({ todoList: this.state.todoList });
     // Reset input value
     event.target.title.value = "";
   }
@@ -34,9 +33,9 @@ export default class App extends React.Component {
 
   // Delete TODO
   handleDelete(i) {
-    this.state.todo.splice(i, 1);
+    this.state.todoList.splice(i, 1);
     // Update state
-    this.setState({ todo: this.state.todo });
+    this.setState({ todoList: this.state.todoList });
   }
   
   render () {
@@ -44,7 +43,7 @@ export default class App extends React.Component {
       <div>
         <h1>TODO</h1>
         <Form handleCreate={ this.handleCreate }/>
-        <TodoList todos={ this.state.todo } handleEdit={ this.handleEdit } handleDelete={ this.handleDelete }/>
+        <TodoList todoList={ this.state.todoList } handleEdit={ this.handleEdit } handleDelete={ this.handleDelete }/>
       </div>
     )
   }

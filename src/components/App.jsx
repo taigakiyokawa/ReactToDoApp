@@ -15,16 +15,14 @@ export default class App extends React.Component {
   }
 
   // Create TODO
-  handleCreate(event) {
+  handleCreate = (event) => {
     // Prevent redirect
     event.preventDefault();
-    // Add data to todo-array from Form
-    this.state.todoList.push({ title: event.target.title.value }); // Doesn't save yet
     // Update state
-    this.setState({ todoList: this.state.todoList });
+    this.setState(() => ({ todoList: [...this.state.todoList, {title: event.target.title.value}] }));
     // Reset input value
     event.target.title.value = "";
-  }
+  };
 
   // Edit TODO
   handleEdit(i) {

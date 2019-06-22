@@ -18,8 +18,14 @@ export default class App extends React.Component {
   handleCreate = (event) => {
     // Prevent redirect
     event.preventDefault();
+    const newTodo = event.target.title.value;
+    console.log(`newTodo: ${newTodo}`);
+    console.log(`this.state.todoList: ${this.state.todoList}`);
+    const todoList = [...this.state.todoList, newTodo];
+    console.log(`todoList: ${todoList}`);
     // Update state
-    this.setState(() => ({ todoList: [...this.state.todoList, {title: event.target.title.value}] }));
+    this.setState(() => ({ todoList: todoList }));
+    console.log(todoList);
     // Reset input value
     event.target.title.value = "";
   };

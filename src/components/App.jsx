@@ -73,6 +73,9 @@ export default class App extends React.Component {
     console.log("all done");
   }
   
+
+
+
   render () {
     console.log(this.state.todoList);
     console.log(this.state.isAllDone);
@@ -80,7 +83,6 @@ export default class App extends React.Component {
     return (
       <div>
         <h1>TODO</h1>
-        <input type="checkbox" checked={this.isAllDone}/>
         <Form handleCreate={ this.handleCreate }/>
         <TodoList
           todoList={ this.state.todoList }

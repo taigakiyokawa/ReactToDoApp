@@ -23,7 +23,7 @@ export default class App extends React.Component {
     event.preventDefault();
     const newTodo = event.target.title.value;
     console.log(`create: ${newTodo}`);
-    const todoList = [...this.state.todoList, {title: newTodo, isDone: false}];
+    const todoList = [...this.state.todoList, {title: newTodo, isDone: false, isEditMode: false}];
     // Update state
     this.setState(() => ({ todoList: todoList, isAllDone: false }));
     // Reset input value
@@ -32,7 +32,9 @@ export default class App extends React.Component {
 
   // Edit TODO
   handleEdit = (id) => {
+    const editTodo = this.state.todoList[id];
     console.log(`TODO ${id} is Edit mode now.`);
+
   }
 
   // Delete TODO
@@ -40,12 +42,14 @@ export default class App extends React.Component {
     const deleteTodo = this.state.todoList[id];
     console.log(`delete: ${deleteTodo.title}`);
     const todoList = this.state.todoList.filter(todo => todo !== deleteTodo);
+    const isDoneList = todoList.map((todo) => { return todo.isDone })
+    const isAllDone = this.and(isDoneList);
     // Update state
-    this.setState({ todoList: todoList });
+    this.setState({ todoList: todoList, isAllDone: isAllDone });
   }
 
   and = (array) => {
-    return array.reduce((prev, current, i, array) => {
+    return array.reduce((prev, current) => {
       return prev && current
     })
   }
@@ -59,8 +63,8 @@ export default class App extends React.Component {
     )
     const isDoneList = todoList.map((todo) => { return todo.isDone })
     console.log(isDoneList);
-    // console.log(this.and(isDoneList));
     const isAllDone = this.and(isDoneList);
+
     this.setState({ todoList: todoList, isAllDone: isAllDone });
   }
 
@@ -68,9 +72,7 @@ export default class App extends React.Component {
     const isAllDone = !this.state.isAllDone
     const todoList = this.state.todoList.map(todo => { return (isAllDone) ? {...todo, isDone: true} : {...todo, isDone: false}})
     
-    console.log(todoList);
     this.setState({todoList: todoList, isAllDone: isAllDone});
-    console.log("all done");
   }
   
 

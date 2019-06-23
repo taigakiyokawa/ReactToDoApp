@@ -5,8 +5,7 @@ const TodoList = (props) => (
   <div>
     <div>
       <input type="checkbox" checked={ props.isAllDone } onChange={ props.handleAllDone }/>
-      {console.log(props.isAllDone)}
-      <span>all done</span>
+      <span>All done</span>
     </div>
     <ul>
       {props.todoList.map((todo, id) => {

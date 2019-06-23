@@ -7,11 +7,12 @@ export default class App extends React.Component {
     super(props);
     this.state ={
       todoList: [],
-      isDisabled: true,
+      isAllDone: false,
     };
     this.handleCreate = this.handleCreate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleDone = this.handleDone.bind(this);
   }
 
   // Create TODO
@@ -41,7 +42,10 @@ export default class App extends React.Component {
     this.setState({ todoList: todoList });
   }
 
-  // handleDone()
+  handleDone = (id) => {
+    const todo = this.state.todoList[id];
+    console.log(`${todo} is done.`);
+  }
   
   render () {
     console.log(this.state.todoList);
@@ -54,6 +58,7 @@ export default class App extends React.Component {
           todoList={ this.state.todoList }
           handleEdit={ this.handleEdit }
           handleDelete={ this.handleDelete }
+          handleDone={ this.handleDone }
         />
       </div>
     )

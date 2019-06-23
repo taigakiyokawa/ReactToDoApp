@@ -19,7 +19,7 @@ export default class App extends React.Component {
     // Prevent redirect
     event.preventDefault();
     const newTodo = event.target.title.value;
-    console.log(`newTodo: ${newTodo}`);
+    console.log(`create: ${newTodo}`);
     const todoList = [...this.state.todoList, {title: newTodo, isDone: false}];
     // Update state
     this.setState(() => ({ todoList: todoList }));
@@ -28,27 +28,33 @@ export default class App extends React.Component {
   };
 
   // Edit TODO
-  handleEdit(i) {
-    console.log(`TODO ${i} is Edit mode now.`);
+  handleEdit = (id) => {
+    console.log(`TODO ${id} is Edit mode now.`);
   }
 
   // Delete TODO
-  handleDelete(id) {
+  handleDelete = (id) => {
     const deleteTodo = this.state.todoList[id];
-    console.log(`delete: ${deleteTodo}`);
-    const todoList = this.state.todoList.filter(todo => todo !== this.state.todoList[id]);
-    console.log(todoList);
+    console.log(`delete: ${deleteTodo.title}`);
+    const todoList = this.state.todoList.filter(todo => todo !== deleteTodo);
     // Update state
     this.setState({ todoList: todoList });
   }
+
+  // handleDone()
   
   render () {
     console.log(this.state.todoList);
+    console.log(this.state.todoList.length);
     return (
       <div>
         <h1>TODO</h1>
         <Form handleCreate={ this.handleCreate }/>
-        <TodoList todoList={ this.state.todoList } handleEdit={ this.handleEdit } handleDelete={ this.handleDelete }/>
+        <TodoList
+          todoList={ this.state.todoList }
+          handleEdit={ this.handleEdit }
+          handleDelete={ this.handleDelete }
+        />
       </div>
     )
   }

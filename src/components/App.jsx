@@ -20,12 +20,9 @@ export default class App extends React.Component {
     event.preventDefault();
     const newTodo = event.target.title.value;
     console.log(`newTodo: ${newTodo}`);
-    console.log(`this.state.todoList: ${this.state.todoList}`);
-    const todoList = [...this.state.todoList, newTodo];
-    console.log(`todoList: ${todoList}`);
+    const todoList = [...this.state.todoList, {title: newTodo, isDone: false}];
     // Update state
     this.setState(() => ({ todoList: todoList }));
-    console.log(todoList);
     // Reset input value
     event.target.title.value = "";
   };
@@ -36,13 +33,17 @@ export default class App extends React.Component {
   }
 
   // Delete TODO
-  handleDelete(i) {
-    this.state.todoList.splice(i, 1);
+  handleDelete(id) {
+    const deleteTodo = this.state.todoList[id];
+    console.log(`delete: ${deleteTodo}`);
+    const todoList = this.state.todoList.filter(todo => todo !== this.state.todoList[id]);
+    console.log(todoList);
     // Update state
-    this.setState({ todoList: this.state.todoList });
+    this.setState({ todoList: todoList });
   }
   
   render () {
+    console.log(this.state.todoList);
     return (
       <div>
         <h1>TODO</h1>

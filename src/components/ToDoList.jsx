@@ -8,7 +8,8 @@ const TodoList = (props) => (
         <Todo
           key={id}
           id={id}
-          title={todo.title} 
+          title={todo.title}
+          isDone={todo.isDone}
           handleEdit={ props.handleEdit } 
           handleDelete={ props.handleDelete }
           handleDone={ props.handleDone }

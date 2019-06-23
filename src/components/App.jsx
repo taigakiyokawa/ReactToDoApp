@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './Form';
 import TodoList from './TodoList';
+import { ENETDOWN } from 'constants';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -43,13 +44,20 @@ export default class App extends React.Component {
   }
 
   handleDone = (id) => {
-    const todo = this.state.todoList[id];
-    console.log(`${todo} is done.`);
+    const todoList = this.state.todoList.map((todo, i) => {
+        return (
+          (i === id) ? {...todo, isDone: !todo.isDone} : todo
+        )
+      }
+    )
+    // const todo = this.state.todoList[id];
+    // console.log(todo.title);
+    this.setState({ todoList: todoList });
   }
   
   render () {
     console.log(this.state.todoList);
-    console.log(this.state.todoList.length);
+    // console.log(this.state.todoList.length);
     return (
       <div>
         <h1>TODO</h1>

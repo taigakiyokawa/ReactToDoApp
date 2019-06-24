@@ -8,6 +8,6 @@ const Todo = (props) => (
       x
     </button>
   </li>
-)
+);
 
 export default Todo;

@@ -1,15 +1,15 @@
 import React from 'react';
 import Form from './Form';
 import TodoList from './TodoList';
-import { ENETDOWN } from 'constants';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state ={
+    this.state = {
       todoList: [],
       isAllDone: false,
     };
+
     this.handleCreate = this.handleCreate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
@@ -17,68 +17,73 @@ export default class App extends React.Component {
     this.handleAllDone = this.handleAllDone.bind(this);
   }
 
-  // Create TODO
-  handleCreate = (event) => {
+  // Return true/false result by AND for all values of todoList
+  and(todoList) {
+    if (todoList.length === 0) {
+      return false;
+    } else {
+      // Create an Array has only isDone[true/false]
+      const isDoneList = todoList.map(t => { return t.isDone; });
+      return isDoneList.reduce((prev, current) => { return prev && current; });
+    }
+  }
+
+  // Create a new todo{title: string, isDone: boolean, isEditMode: boolean}
+  handleCreate(event) {
     // Prevent redirect
     event.preventDefault();
     const newTodo = event.target.title.value;
     console.log(`create: ${newTodo}`);
-    const todoList = [...this.state.todoList, {title: newTodo, isDone: false, isEditMode: false}];
+    const todoList = [...this.state.todoList, { title: newTodo, isDone: false, isEditMode: false }];
     // Update state
-    this.setState(() => ({ todoList: todoList, isAllDone: false }));
-    // Reset input value
+    this.setState({ todoList: todoList, isAllDone: false });
+    // Reset text field values
     event.target.title.value = "";
-  };
+  }
 
-  // Edit TODO
-  handleEdit = (id) => {
+  // Change isEditMode of todoList[i] => true/false
+  handleEdit(id) {
     const editTodo = this.state.todoList[id];
     console.log(`TODO ${id} is Edit mode now.`);
-
   }
 
-  // Delete TODO
-  handleDelete = (id) => {
+  // Delete a todoList[id]
+  handleDelete(id) {
     const deleteTodo = this.state.todoList[id];
     console.log(`delete: ${deleteTodo.title}`);
-    const todoList = this.state.todoList.filter(todo => todo !== deleteTodo);
-    const isDoneList = todoList.map((todo) => { return todo.isDone })
-    const isAllDone = this.and(isDoneList);
+    const todoList = this.state.todoList.filter(t => t !== deleteTodo);
+    // If all isDone of todoList is true, isAllDone will be true.
+    const isAllDone = this.and(todoList);
     // Update state
     this.setState({ todoList: todoList, isAllDone: isAllDone });
   }
 
-  and = (array) => {
-    return array.reduce((prev, current) => {
-      return prev && current
-    })
-  }
-
-  handleDone = (id) => {
-    const todoList = this.state.todoList.map((todo, i) => {
-        return (
-          (i === id) ? {...todo, isDone: !todo.isDone} : todo
-        )
-      }
-    )
-    const isDoneList = todoList.map((todo) => { return todo.isDone })
-    console.log(isDoneList);
-    const isAllDone = this.and(isDoneList);
-
+  // Change todoList[id].isDone => true/false
+  handleDone(id) {
+    const todoList = this.state.todoList.map((t, i) => {
+        return (i === id) ? {...t, isDone: !t.isDone} : t;
+    });
+    // If all isDone of todoList is true, isAllDone will be true.
+    const isAllDone = this.and(todoList);
+    // Update state
     this.setState({ todoList: todoList, isAllDone: isAllDone });
   }
 
-  handleAllDone = () => {
-    const isAllDone = !this.state.isAllDone
-    const todoList = this.state.todoList.map(todo => { return (isAllDone) ? {...todo, isDone: true} : {...todo, isDone: false}})
-    
-    this.setState({todoList: todoList, isAllDone: isAllDone});
+  // Change isAllDone => true/false
+  handleAllDone() {
+    const isAllDone = !this.state.isAllDone;
+    const todoList = this.state.todoList.map(t => { 
+      return (isAllDone) ? {...t, isDone: true} : {...t, isDone: false};
+    });
+    // Update state
+    this.setState({ todoList: todoList, isAllDone: isAllDone });
   }
   
 
 
 
   render () {
+    console.log("--- updated ---");
     console.log(this.state.todoList);
     console.log(this.state.isAllDone);
 
@@ -95,6 +100,6 @@ export default class App extends React.Component {
           handleAllDone={ this.handleAllDone }
         />
       </div>
-    )
+    );
   }
 }

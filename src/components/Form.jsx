@@ -7,6 +7,6 @@ const Form = (props) => (
       <input type="submit" value="CREATE"/>
     </div>
   </form>
-)
+);
 
 export default Form;

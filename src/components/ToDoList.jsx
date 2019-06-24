@@ -8,13 +8,13 @@ const TodoList = (props) => (
       <span>All done</span>
     </div>
     <ul>
-      {props.todoList.map((todo, id) => {
+      {props.todoList.map((t, id) => {
         return (
           <Todo
             key={ id }
             id={ id }
-            title={ todo.title }
-            isDone={ todo.isDone }
+            title={ t.title }
+            isDone={ t.isDone }
             handleEdit={ props.handleEdit } 
             handleDelete={ props.handleDelete }
             handleDone={ props.handleDone }
@@ -23,6 +23,6 @@ const TodoList = (props) => (
       })}
     </ul>
   </div>
-)
+);
 
 export default TodoList;

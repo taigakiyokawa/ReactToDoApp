@@ -18,7 +18,7 @@ export default class App extends React.Component {
   }
 
   // Return true/false result by AND for all values of todoList
-  and(todoList) {
+  and = (todoList) => {
     if (todoList.length === 0) {
       return false;
     } else {
@@ -29,12 +29,12 @@ export default class App extends React.Component {
   }
 
   // Create a new todo{title: string, isDone: boolean, isEditMode: boolean}
-  handleCreate(event) {
+  handleCreate = (event) => {
     // Prevent redirect
     event.preventDefault();
     const newTodo = event.target.title.value;
     console.log(`create: ${newTodo}`);
-    const todoList = [...this.state.todoList, { title: newTodo, isDone: false, isEditMode: false }];
+    const todoList = [...this.state.todoList, { title: newTodo, isDone: false, isEdit: false }];
     // Update state
     this.setState({ todoList: todoList, isAllDone: false });
     // Reset text field values
@@ -42,13 +42,20 @@ export default class App extends React.Component {
   }
 
   // Change isEditMode of todoList[i] => true/false
-  handleEdit(id) {
-    const editTodo = this.state.todoList[id];
+  handleEdit = (id) => {
     console.log(`TODO ${id} is Edit mode now.`);
+    const todoList = this.state.todoList.map((t, i) => {
+      return (i === id) ? {...t, isEdit: !t.isEdit} : t;
+    });
+    this.setState({ todoList: todoList });
+  }
+
+  handleUpdate = () => {
+    
   }
 
   // Delete a todoList[id]
-  handleDelete(id) {
+  handleDelete = (id) => {
     const deleteTodo = this.state.todoList[id];
     console.log(`delete: ${deleteTodo.title}`);
     const todoList = this.state.todoList.filter(t => t !== deleteTodo);
@@ -59,7 +66,7 @@ export default class App extends React.Component {
   }
 
   // Change todoList[id].isDone => true/false
-  handleDone(id) {
+  handleDone = (id) => {
     const todoList = this.state.todoList.map((t, i) => {
         return (i === id) ? {...t, isDone: !t.isDone} : t;
     });
@@ -70,7 +77,7 @@ export default class App extends React.Component {
   }
 
   // Change isAllDone => true/false
-  handleAllDone() {
+  handleAllDone = () => {
     const isAllDone = !this.state.isAllDone;
     const todoList = this.state.todoList.map(t => { 
       return (isAllDone) ? {...t, isDone: true} : {...t, isDone: false};
@@ -82,7 +89,7 @@ export default class App extends React.Component {
 
 
 
-  render () {
+  render() {
     console.log("--- updated ---");
     console.log(this.state.todoList);
     console.log(this.state.isAllDone);

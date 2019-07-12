@@ -10,11 +10,11 @@ export default class App extends React.Component {
       isAllDone: false,
     };
 
-    this.handleCreate = this.handleCreate.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
-    this.handleDone = this.handleDone.bind(this);
-    this.handleAllDone = this.handleAllDone.bind(this);
+    // this.handleCreate = this.handleCreate.bind(this);
+    // this.handleDelete = this.handleDelete.bind(this);
+    // this.handleEdit = this.handleEdit.bind(this);
+    // this.handleDone = this.handleDone.bind(this);
+    // this.handleAllDone = this.handleAllDone.bind(this);
   }
 
   // Return true/false result by AND for all values of todoList
@@ -50,7 +50,10 @@ export default class App extends React.Component {
     this.setState({ todoList: todoList });
   }
 
-  handleUpdate = () => {
+  handleUpdate = (id, event) => {
+    event.preventDefault();
+    const value = event.target.title.value
+    console.log(`TODO${id}: ${value}`)
     
   }
 
@@ -102,6 +105,7 @@ export default class App extends React.Component {
           todoList={ this.state.todoList }
           isAllDone={ this.state.isAllDone }
           handleEdit={ this.handleEdit }
+          handleUpdate={ this.handleUpdate }
           handleDelete={ this.handleDelete }
           handleDone={ this.handleDone }
           handleAllDone={ this.handleAllDone }

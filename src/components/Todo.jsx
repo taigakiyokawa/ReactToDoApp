@@ -11,8 +11,8 @@ class Todo extends React.Component {
 
   renderEditView = () => {
     return (
-      <form action="">
-        <input type="text"/>
+      <form onSubmit={ this.props.handleUpdate.bind(this, this.props.id) }>
+        <input id={ this.props.id } type="text" name="title" defaultValue={this.props.title}/>
         <input type="submit" value="UPDATE"/>
       </form>
     )

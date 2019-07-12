@@ -16,7 +16,8 @@ const TodoList = (props) => (
             title={ t.title }
             isDone={ t.isDone }
             isEdit={ t.isEdit }
-            handleEdit={ props.handleEdit } 
+            handleEdit={ props.handleEdit }
+            handleUpdate={ props.handleUpdate } 
             handleDelete={ props.handleDelete }
             handleDone={ props.handleDone }
           />

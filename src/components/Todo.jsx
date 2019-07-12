@@ -1,6 +1,7 @@
 import React from 'react';
 
 class Todo extends React.Component {
+
   renderDefaultView = () => {
     return (
       <span onClick={ () => this.props.handleEdit(this.props.id) }>

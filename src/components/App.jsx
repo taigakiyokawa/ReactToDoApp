@@ -52,9 +52,12 @@ export default class App extends React.Component {
 
   handleUpdate = (id, event) => {
     event.preventDefault();
-    const value = event.target.title.value
-    console.log(`TODO${id}: ${value}`)
-    
+    const updateTodo = event.target.title.value
+    console.log(`TODO${id}: ${updateTodo}`)
+    const todoList = this.state.todoList.map((t, i) => {
+      return (i === id) ? {...t, title: updateTodo, isEdit: false} : t;
+    });
+    this.setState({ todoList: todoList });
   }
 
   // Delete a todoList[id]
@@ -100,6 +103,7 @@ export default class App extends React.Component {
     return (
       <div>
         <h1>TODO</h1>
+        <p>tap to edit</p>
         <Form handleCreate={ this.handleCreate }/>
         <TodoList
           todoList={ this.state.todoList }

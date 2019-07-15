@@ -4,7 +4,11 @@ import Todo from './Todo';
 const TodoList = (props) => (
   <div>
     <div>
-      <input type="checkbox" checked={ props.isAllDone } onChange={ props.handleAllDone }/>
+      <input 
+        type="checkbox" 
+        checked={ props.isAllDone } 
+        onChange={ props.handleAllDone }
+      />
       <span>All done</span>
     </div>
     <ul>
